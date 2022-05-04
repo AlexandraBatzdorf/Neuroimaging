@@ -2,7 +2,7 @@
 # BRAINIX sample data is available through OSIRIX: 
 # https://www.osirix-viewer.com/resources/dicom-image-library/
 # Reference atlas (MNI 152 T1w, 0.5mm, asymmetrical) can be retrieved from NIST:
-# http://nist.mni.mcgill.ca/icbm-152-nonlinear-atlases-2009/
+# http://www.bic.mni.mcgill.ca/~vfonov/icbm/2009/mni_icbm152_nlin_asym_09b_nifti.zip
 # FSL software is required:
 # https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/
 # Required R packages: devtools, cmaker*, ITKR*, ANTsR*, extransr*, papayar*,
