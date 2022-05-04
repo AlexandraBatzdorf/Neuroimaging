@@ -1,1 +1,1 @@
-[Reference atlas](http://nist.mni.mcgill.ca/icbm-152-nonlinear-atlases-2009/) (MNI 152 T1w, 0.5mm, asymmetrical) can be retrieved from NIST.
+To download the reference atlas, [click here](http://www.bic.mni.mcgill.ca/~vfonov/icbm/2009/mni_icbm152_nlin_asym_09b_nifti.zip).
