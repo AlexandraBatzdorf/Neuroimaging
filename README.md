@@ -20,4 +20,4 @@ reshape2, ggplot2, neurobase, qpdf, fslr, viridis
 [BRAINIX sample data](https://www.osirix-viewer.com/resources/dicom-image-library/) is available through OSIRIX.  
 [Reference atlas](http://www.bic.mni.mcgill.ca/~vfonov/icbm/2009/mni_icbm152_nlin_asym_09b_nifti.zip) (MNI 152 T1w, 0.5mm, asymmetrical) can be retrieved from NIST.
 
-This script is meant for a single case, but it can be modified to construct a batch processing pipeline.
+This script is meant for a single case, but it can be modified easily to construct a batch processing pipeline.
