@@ -1,1 +1,1 @@
-Output files generated using Processing_Script.R.
+Output files generated using Processing_Script.R. Contains all files except T1_Smoothed.nii.gz and T1_SyN_Registered.nii.gz, which were excluded due to file size constraints.
