@@ -7,7 +7,7 @@
 
 
 
-# Download BRAINIX sample data, which is available through OSIRIX: 
+# Download BRAINIX sample data, which is available through OsiriX: 
 # https://www.osirix-viewer.com/resources/dicom-image-library/
 {download.file(url="https://tinyurl.com/BRAINIXimages", destfile='~/BRAINIX.zip')
 unzip(zipfile='~/BRAINIX.zip', exdir='~/')}
