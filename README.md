@@ -1,5 +1,5 @@
 # Neuroimaging
-Processing neuroimaging data in R example, 2022.
+### Processing neuroimaging data in R example, 2022.
 
 Includes reading in and viewing DICOM images, converting to NIfTI, adjusting
 voxel intensity values, performing and evaluating different inhomogeneity 
