@@ -7,7 +7,7 @@ correction methods, skull stripping/brain extraction, automatic tissue
 segmentation, atlas registration, Gaussian smoothing, and white and gray
 matter volume estimation.
 
-The only download required before starting is [FSL software](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/). All other downloads—including retrieving sample data—occur within the R script.
+The only download required before starting is [FSL software](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/). All other downloads—including retrieving sample data—occur within [the R script](https://github.com/AlexandraBatzdorf/Neuroimaging/blob/main/Processing_Script.R).
 
 ### Required R packages: 
 devtools, [cmaker*](https://github.com/stnava/cmaker), [ITKR*](https://github.com/stnava/ITKR), [ANTsR*](https://github.com/ANTsX/ANTsR), [extransr*](https://github.com/muschellij2/extrantsr), [papayar*](https://github.com/muschellij2/papayar), oro.dicom, oro.nifti,
@@ -17,7 +17,7 @@ reshape2, ggplot2, neurobase, qpdf, fslr, viridis
 [FSL software](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/) is required.
 
 ### Input flies:
-[BRAINIX sample data](https://www.osirix-viewer.com/resources/dicom-image-library/) is available through OSIRIX.  
+[BRAINIX sample data](https://codeload.github.com/AlexandraBatzdorf/BRAINIX/zip/refs/heads/main) is available through [OsiriX](https://www.osirix-viewer.com/resources/dicom-image-library/).  
 [Reference atlas](http://www.bic.mni.mcgill.ca/~vfonov/icbm/2009/mni_icbm152_nlin_asym_09b_nifti.zip) (MNI 152 T1w, 0.5mm, asymmetrical) can be retrieved from NIST.
 
 This script is meant for a single case, but it can be modified easily to construct a batch processing pipeline.
