@@ -1,8 +1,7 @@
 ## Alexandra Batzdorf, Processing Neuroimaging Data in R Example, 2022
-# FSL software is required:
-# https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/
-# Required R packages: devtools, cmaker*, ITKR*, ANTsR*, extransr*, papayar*,
-# oro.dicom, oro.nifti, reshape2, ggplot2, neurobase, qpdf, fslr, viridis
+# FSL software is required: https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/
+# Required R packages: oro.dicom, oro.nifti, devtools, neurobase*, cmaker*, ITKR*, 
+# ANTsR*, extrantsr*, papayar*, fslr*, reshape2, ggplot2, qpdf, viridis
 # *Hosted on GitHub.
 
 
@@ -22,8 +21,11 @@ unzip(zipfile='~/MNI.zip', exdir='~/')}
 
 # Install required GitHub packages. (Note: they may take several minutes 
 # to install.)
-{if (!require(devtools)) {install.packages("devtools"); require(devtools)}
+{if (!require(oro.dicom)) {install.packages("oro.dicom"); require(oro.dicom)}
+  if (!require(oro.nifti)) {install.packages("oro.nifti"); require(oro.nifti)}
+  if (!require(devtools)) {install.packages("devtools"); require(devtools)}
   if (!require(ANTsR) | !require(extrantsr)) {
+    devtools::install_github("muschellij2/neurobase"); require(neurobase)
     devtools::install_github("stnava/cmaker"); require(cmaker)
     devtools::install_github("stnava/ITKR"); require(ITKR)
     devtools::install_github("stnava/ANTsR"); require(ANTsR)
@@ -31,17 +33,14 @@ unzip(zipfile='~/MNI.zip', exdir='~/')}
   } else {
     require(ANTsR); require(extrantsr)
   }
-  if (!require(papayar)) {
-    devtools::install_github("muschellij2/papayar"); require(papayar)
-  } else {
-    require(papayar)
-  }}
+  if (!require(papayar)) {devtools::install_github("muschellij2/papayar") 
+    require(papayar)}
+  if (!require(fslr)) {devtools::install_github("muschellij2/fslr"); require(fslr)}
+  options(fsl.path="/usr/local/fsl")}
 
 
 # Read in DICOM images.
-{if (!require(neurobase)) {install.packages("neurobase"); library(neurobase)}
-  if (!require(oro.dicom)) {install.packages("oro.dicom"); library(oro.dicom)}
-  T1.example <- readDICOM("~/BRAINIX-main/DICOM/T1/")}
+T1.example <- readDICOM("~/BRAINIX-main/DICOM/T1/")
 
 
 # Convert DICOMs to NIfTI format.
@@ -52,7 +51,6 @@ T1.nifti <- dicom2nifti(T1.example)
 {dir.create("~/BRAINIX-main/T1_Processing_Output")
   output.path <- "~/BRAINIX-main/T1_Processing_Output"
   setwd(output.path)
-  if (!require(oro.nifti)) {install.packages("oro.nifti"); library(oro.nifti)}
   writeNIfTI(nim=T1.nifti, filename="T1_NIfTI")}
 
 
@@ -83,25 +81,21 @@ papaya(list(T1.nifti), daemon=T)
 # Set the theme elements.
 {if (!require(ggplot2)) {install.packages("ggplot2"); library(ggplot2)}
   Theme <- theme_classic() + 
-    theme(strip.text.x=element_text(size=10, family="sans", color="black", 
+    theme(text=element_text(size=10, family="sans", color="black", face="bold"),
+          strip.text.x=element_text(size=10, family="sans", color="black",
                                     face="bold", hjust=0.5),
-          strip.background=element_blank(), 
-          axis.line.y=element_line(color="black"), 
-          axis.line.x=element_line(color="black"), 
-          axis.text.x=element_text(size=10, family="sans", 
-                                   color="black", face="bold"),
-          axis.text.y=element_text(size=10, family="sans", 
-                                   color="black", face="bold"),
+          strip.background=element_blank(), line=element_line(color="black"),
+          axis.text=element_text(size=10, family="sans", color="black",
+                                 face="bold"),
           axis.ticks=element_line(size=1, color="black"),
           panel.border=element_rect(color="black", fill=NA, size=2), 
-          text=element_text(size=10, family="sans", face="bold", color="black"),
           legend.key=element_blank(), legend.background=element_blank(),
-          legend.title=element_text(size=8, family="sans", 
-                                    color="black", face="bold"), 
-          legend.text=element_text(size=8, family="sans", 
-                                   face="bold", color="black"),
-          legend.title.align=0.5, 
-          legend.justification=c(1,1), legend.position=c(1,1))}
+          legend.title=element_text(size=8, family="sans", color="black", 
+                                    face="bold"), 
+          legend.text=element_text(size=8, family="sans", color="black",
+                                   face="bold"),
+          legend.title.align=0.5, legend.justification=c(1,1), 
+          legend.position=c(1,1))}
 # Create the graphs. (Note the different y-axes.)
 {intensity.hist <-
   ggplot(data=T1.df, aes(x=value, y=..density..)) +
@@ -218,9 +212,7 @@ lin.spline <- function(x, spline.knots, spline.slopes) {
 
 
 # Perform a Guillemaud and Brady inhomogeneity correction.
-{if (!require(fslr)) {install.packages("fslr")}
-  library(fslr); options(fsl.path="/usr/local/fsl")
-  T1.biasGB.spline <- fsl_biascorrect(T1.spline, retimg=T, 
+{T1.biasGB.spline <- fsl_biascorrect(T1.spline, retimg=T, 
                                       outfile=file.path(paste0(output.path,
                                                         "/T1_BiasGB.nii.gz")))}
 
